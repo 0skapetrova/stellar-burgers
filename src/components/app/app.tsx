@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
-import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import {
+  Route,
+  Routes,
+  useLocation,
+  useMatch,
+  useNavigate
+} from 'react-router-dom';
 
 import {
   ConstructorPage,
@@ -18,11 +24,9 @@ import styles from './app.module.css';
 import { AppHeader, IngredientDetails, OrderInfo } from '@components';
 import { Modal } from '@components';
 import { OnlyAuth, OnlyUnAuth } from '../ProtectedRoute';
-import { useDispatch, useSelector } from '../../services/store';
+import { useDispatch } from '../../services/store';
 import { checkUserAuth } from '../../services/features/userSlice';
 import { getIngredientsData } from '../../services/features/ingredientsSlice';
-import { getOrdersData } from '../../services/features/ordersSlice';
-import { getFeedsData } from '../../services/features/feedsSlice';
 
 const App = () => {
   const location = useLocation();
@@ -31,6 +35,10 @@ const App = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const feedMatch = useMatch('/feed/:number');
+  const profileOrderMatch = useMatch('/profile/orders/:number');
+  const orderNumber =
+    feedMatch?.params.number || profileOrderMatch?.params.number;
 
   const onClose = () => {
     navigate(-1);
@@ -65,6 +73,12 @@ const App = () => {
           path='/profile/orders'
           element={<OnlyAuth component={<ProfileOrders />} />}
         />
+        <Route path='/ingredients/:id' element={<IngredientDetails />} />
+        <Route path='/feed/:number' element={<OrderInfo />} />
+        <Route
+          path='/profile/orders/:number'
+          element={<OnlyAuth component={<OrderInfo />} />}
+        />
         <Route path='*' element={<NotFound404 />} />
       </Routes>
 
@@ -73,17 +87,21 @@ const App = () => {
           <Route
             path='/feed/:number'
             element={
-              <Modal title='' onClose={onClose}>
-                <OrderInfo />
-              </Modal>
+              <Modal
+                title={`#${orderNumber}`}
+                onClose={onClose}
+                children={<OrderInfo />}
+              />
             }
           />
           <Route
             path='/ingredients/:id'
             element={
-              <Modal title='' onClose={onClose}>
-                <IngredientDetails />
-              </Modal>
+              <Modal
+                title='Детали ингредиента'
+                onClose={onClose}
+                children={<IngredientDetails />}
+              />
             }
           />
           <Route
@@ -91,9 +109,11 @@ const App = () => {
             element={
               <OnlyAuth
                 component={
-                  <Modal title='' onClose={onClose}>
-                    <OrderInfo />
-                  </Modal>
+                  <Modal
+                    title={`#${orderNumber}`}
+                    onClose={onClose}
+                    children={<OrderInfo />}
+                  />
                 }
               />
             }
