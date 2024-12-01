@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1733043968260" clover="3.2.0">
-  <project timestamp="1733043968260" name="All files">
-    <metrics statements="762" coveredstatements="528" conditionals="56" coveredconditionals="46" methods="41" coveredmethods="17" elements="859" coveredelements="591" complexity="0" loc="762" ncloc="762" packages="2" files="8" classes="8"/>
+<coverage generated="1733051451438" clover="3.2.0">
+  <project timestamp="1733051451438" name="All files">
+    <metrics statements="744" coveredstatements="510" conditionals="56" coveredconditionals="46" methods="41" coveredmethods="17" elements="841" coveredelements="573" complexity="0" loc="744" ncloc="744" packages="2" files="8" classes="8"/>
     <package name="services.features">
-      <metrics statements="480" coveredstatements="441" conditionals="56" coveredconditionals="46" methods="23" coveredmethods="17"/>
+      <metrics statements="462" coveredstatements="423" conditionals="56" coveredconditionals="46" methods="23" coveredmethods="17"/>
       <file name="constructorSlice.ts" path="C:\Users\79218\dev\stellar-burgers\src\services\features\constructorSlice.ts">
-        <metrics statements="85" coveredstatements="85" conditionals="9" coveredconditionals="8" methods="7" coveredmethods="6"/>
+        <metrics statements="67" coveredstatements="67" conditionals="9" coveredconditionals="8" methods="7" coveredmethods="6"/>
         <line num="1" count="1" type="stmt"/>
         <line num="2" count="1" type="stmt"/>
         <line num="3" count="1" type="stmt"/>
@@ -73,24 +73,6 @@
         <line num="65" count="1" type="stmt"/>
         <line num="66" count="1" type="stmt"/>
         <line num="67" count="1" type="stmt"/>
-        <line num="68" count="1" type="stmt"/>
-        <line num="69" count="1" type="stmt"/>
-        <line num="70" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
-        <line num="72" count="1" type="stmt"/>
-        <line num="73" count="1" type="stmt"/>
-        <line num="74" count="1" type="stmt"/>
-        <line num="75" count="1" type="stmt"/>
-        <line num="76" count="1" type="stmt"/>
-        <line num="77" count="1" type="stmt"/>
-        <line num="78" count="1" type="stmt"/>
-        <line num="79" count="1" type="stmt"/>
-        <line num="80" count="1" type="stmt"/>
-        <line num="81" count="1" type="stmt"/>
-        <line num="82" count="1" type="stmt"/>
-        <line num="83" count="1" type="stmt"/>
-        <line num="84" count="1" type="stmt"/>
-        <line num="85" count="1" type="stmt"/>
       </file>
       <file name="feedsSlice.ts" path="C:\Users\79218\dev\stellar-burgers\src\services\features\feedsSlice.ts">
         <metrics statements="52" coveredstatements="50" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="1"/>

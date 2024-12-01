@@ -1,3 +1,5 @@
+import { BURGER_CONSTRUCTOR_BUN, BURGER_CONSTRUCTOR_INGREDIENT } from "../constants";
+
 describe('Order', () => {
   beforeEach(() => {
     cy.intercept('GET', '/api/ingredients', {
@@ -18,7 +20,7 @@ describe('Order', () => {
     );
     cy.setCookie('accessToken', 'test-accessToken');
 
-    cy.visit('http://localhost:4000/');
+    cy.visit('/');
   });
 
   afterEach(() => {
@@ -29,11 +31,11 @@ describe('Order', () => {
   it('проверка оформления заказа', () => {
     cy.wait('@getIngredients');
     cy.get('[data-cy="ingredient-link"]')
-      .filter(':contains("Краторная булка N-200i")')
+      .filter(`:contains(${BURGER_CONSTRUCTOR_BUN})`)
       .find('button')
       .click();
     cy.get('[data-cy="ingredient-link"]')
-      .filter(':contains("Биокотлета из марсианской Магнолии")')
+      .filter(`:contains(${BURGER_CONSTRUCTOR_INGREDIENT})`)
       .find('button')
       .click();
     cy.get('[data-cy="burger-constructor"]')
