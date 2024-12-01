@@ -54,6 +54,7 @@ export const checkUserAuth = createAsyncThunk(
         .then((res) => dispatch(setUser(res.user)))
         .finally(() => dispatch(setIsAuthChecked(true)));
     } else {
+      dispatch(logoutUser());
       dispatch(setIsAuthChecked(true));
     }
   }

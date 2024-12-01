@@ -6,6 +6,7 @@ import {
   getOrdersState
 } from '../../services/features/ordersSlice';
 import { useDispatch, useSelector } from '../../services/store';
+import { Preloader } from '@ui';
 
 export const ProfileOrders: FC = () => {
   /** TODO: взять переменную из стора */
@@ -16,6 +17,10 @@ export const ProfileOrders: FC = () => {
   useEffect(() => {
     dispatch(getOrdersData());
   }, []);
+
+  if (!orders?.length) {
+    return <Preloader />;
+  }
 
   return <ProfileOrdersUI orders={orders} />;
 };

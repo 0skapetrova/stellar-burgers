@@ -1,5 +1,5 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
-import { TConstructorIngredient, TIngredient } from '@utils-types';
+import { TConstructorIngredient, TIngredient } from './../../utils/types';
 
 interface IConstructorState {
   bun: TConstructorIngredient | null;
@@ -49,6 +49,7 @@ export const constructorSlice = createSlice({
         state.ingredients.splice(position + 1, 0, ingredient);
       }
     },
+
     resetConstructorState: (state) => initialState
   },
   selectors: {

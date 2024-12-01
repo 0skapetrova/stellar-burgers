@@ -1,6 +1,6 @@
-import { getFeedsApi } from '@api';
+import { getFeedsApi } from './../../utils/burger-api';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { TOrder } from '@utils-types';
+import { TOrder } from './../../utils/types';
 
 export const getFeedsData = createAsyncThunk('orders/getFeeds', async () => {
   const data = await getFeedsApi();
@@ -12,13 +12,15 @@ interface IFeedState {
   total: number;
   totalToday: number;
   isLoading: boolean;
+  error: string | null;
 }
 
-const initialState: IFeedState = {
+export const initialState: IFeedState = {
   orders: [],
   total: 0,
   totalToday: 0,
-  isLoading: false
+  isLoading: false,
+  error: null
 };
 
 export const feedSlice = createSlice({
@@ -32,6 +34,7 @@ export const feedSlice = createSlice({
     builder
       .addCase(getFeedsData.pending, (state) => {
         state.isLoading = true;
+        state.error = null;
       })
       .addCase(getFeedsData.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -39,8 +42,9 @@ export const feedSlice = createSlice({
         state.total = action.payload.total;
         state.totalToday = action.payload.totalToday;
       })
-      .addCase(getFeedsData.rejected, (state) => {
+      .addCase(getFeedsData.rejected, (state, action) => {
         state.isLoading = false;
+        state.error = action.error.message || 'Ошибка загрузки всех заказов';
       });
   }
 });

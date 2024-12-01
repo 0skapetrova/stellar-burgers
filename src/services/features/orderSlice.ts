@@ -1,6 +1,6 @@
-import { orderBurgerApi } from '@api';
+import { orderBurgerApi } from './../../utils/burger-api';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TOrder } from '@utils-types';
+import { TOrder } from './../../utils/types';
 
 export const makeOrder = createAsyncThunk(
   'order/makeOrder',
@@ -15,13 +15,15 @@ interface IOrderState {
   orderRequest: boolean;
   order: TOrder | null;
   isLoading: boolean;
+  error: string | null;
 }
 
 export const initialState: IOrderState = {
   orderModalData: null,
   orderRequest: false,
   order: null,
-  isLoading: false
+  isLoading: false,
+  error: null
 };
 
 export const orderSlice = createSlice({
@@ -41,6 +43,7 @@ export const orderSlice = createSlice({
       .addCase(makeOrder.pending, (state) => {
         state.isLoading = true;
         state.orderRequest = true;
+        state.error = null;
       })
       .addCase(makeOrder.fulfilled, (state, action) => {
         state.isLoading = false;
@@ -48,9 +51,10 @@ export const orderSlice = createSlice({
         state.order = action.payload.order;
         state.orderModalData = action.payload.order;
       })
-      .addCase(makeOrder.rejected, (state) => {
+      .addCase(makeOrder.rejected, (state, action) => {
         state.isLoading = false;
         state.orderRequest = false;
+        state.error = action.error.message || 'Ошибка оформления заказа';
       });
   }
 });
